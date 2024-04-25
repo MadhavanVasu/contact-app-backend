@@ -1,0 +1,51 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ContactApp
+    username: postgres
+    password: jackie
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLInnoDBDialect
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+  # This property is used to determine whether an exception should be thrown if no handler
+  # (controller method) is found to handle an incoming request.
+  # When set to true, if a request is received for which no handler is mapped,
+  # Spring MVC will throw a NoHandlerFoundException.
+  mvc:
+    throw-exception-if-no-handler-found: true
+    async:
+      request-timeout: 3600000
+
+cloud:
+  aws:
+    credentials:
+      access-key: ${AWS_IAM_USER_ACCESS_KEY}
+      secret-key: ${AWS_IAM_USER_SECRET_KEY}
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: contactimagebucket
+
+server:
+  port: 8080
+  error:
+    path: /user/error
+    whitelabel:
+      enabled: false
+
